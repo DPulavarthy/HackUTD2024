@@ -104,8 +104,30 @@ export default () => {
 
     const floorSubmit = async () => {
         try {
+            
             upload(document.querySelector('#floor #cache').textContent, floorFile.name, floorFile.type);
             localStorage.setItem('floorFile', document.querySelector('#floor #cache').textContent);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const masterSubmit = async () => {
+        try {
+
+            upload(document.querySelector('#power #cache').textContent, powerFile.name, powerFile.type);
+
+
+            upload(document.querySelector('#water #cache').textContent, waterFile.name, waterFile.type);
+            // localStorage.setItem('waterFile', document.querySelector('#water #cache').textContent);
+
+            upload(document.querySelector('#carbon #cache').textContent, carbonFile.name, carbonFile.type);
+            // localStorage.setItem('carbonFile', document.querySelector('#carbon #cache').textContent);
+
+            upload(document.querySelector('#floor #cache').textContent, floorFile.name, floorFile.type);
+            // localStorage.setItem('floorFile', document.querySelector('#floor #cache').textContent);
+
+            upload(document.querySelector('#waste #cache').textContent, wasteFile.name, wasteFile.type);
         } catch (error) {
             console.log(error);
         }
@@ -189,7 +211,7 @@ export default () => {
             </div>
             <label for="additional-input" class="styled-label">Additional Information</label>
         <input type="text" id="additional-input" class="styled-input" placeholder="Additional Information" />
-        <button onClick={wasteSubmit} className="submit-btn">Submit</button>
+        <button onClick={masterSubmit} className="submit-btn">Submit</button>
         </div>
 
     </>
