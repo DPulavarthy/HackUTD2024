@@ -4,23 +4,19 @@ import '../styles/Speech.css';
 
 export default () => {
 
-    let response = "Based on the waste data provided: 1. **Waste Management Insights**: - Floor 1 consistently shows higher waste generation compared to the other floors, with a notable peak on 10/17/2024, where it reached 36.86 kg【4:6†waste.json】. - Floor 2 also exhibits significant waste generation, hitting a peak of 41.49 kg on 10/11/2024【4:12†waste.json】. - Floors 3 and 4 generally generate less waste but still show fluctuations, suggesting opportunities for targeted waste reduction strategies【4:8†waste.json】【4:10†waste.json】. These trends suggest areas for improvement in your waste management strategy. Consider implementing recycling programs or engaging floor-specific initiatives to reduce overall waste output. Additionally, floors with lower waste output might benefit from recognition programs to encourage continued efficient practices. Unfortunately, the data available solely relates to waste management. If you're seeking insights on carbon emissions, energy consumption, or water usage, please upload the respective datasets for me to provide comprehensive recommendations."
-
     const [objectId, setObjectId] = useState(null);
     const [percent, setPercent] = useState(0);
     const [freelancers, setFreelancers] = useState([]);
-
-
     const [start, setStart] = useState(false);
     const [gptres, setGptres] = useState(false);
     const [counterId, setCounter] = useState(null);
     const [transcript, setTranscript] = useState('<i>Listening...</i>');
     const [job, setJob] = useState(false);
-    let final = ''
+    let final = '';
 
     const { webkitSpeechRecognition } = window;
     const recognition = new webkitSpeechRecognition();
-    let keywords = ['Python', 'Java', 'SQL', 'Machine Learning', 'Data Science', 'Cloud Computing', 'Docker', 'Kubernetes', 'AWS', 'Flask', 'Django', 'JavaScript', 'React', 'Node.js', 'HTML', 'CSS', 'Artificial Intelligence', 'Blockchain', 'Solidity', 'Neural Networks', 'Mobile App Development', 'Android', 'iOS', 'UX/UI Design', 'R', 'DevOps'].map((word) => word.toLowerCase())
+    let keywords = ['Python', 'Java', 'SQL', 'Machine Learning', 'Data Science', 'Cloud Computing', 'Docker', 'Kubernetes', 'AWS', 'Flask', 'Django', 'JavaScript', 'React', 'Node.js', 'HTML', 'CSS', 'Artificial Intelligence', 'Blockchain', 'Solidity', 'Neural Networks', 'Mobile App Development', 'Android', 'iOS', 'UX/UI Design', 'R', 'DevOps'].map((word) => word.toLowerCase());
 
     let once = false
     recognition.continuous = true;
@@ -29,20 +25,18 @@ export default () => {
 
     recognition.onstart = function () {
         console.log('Listening...');
-        setStart(true)
+        setStart(true);
     };
 
     async function runE2() {
         setJob(true);
-        const list = []
+        const list = [];
         document.getElementById('transcript')?.innerHTML.match(/\<b\>.*?\<\/b\>/g)?.forEach((word) => {
-            return list.includes(word.trim().slice(3, -4)) ? null : list.push(word.trim().slice(3, -4).replace(/\.|,|!|\?/g, ''))
-        })
+            return list.includes(word.trim().slice(3, -4)) ? null : list.push(word.trim().slice(3, -4).replace(/\.|,|!|\?/g, ''));
+        });
     }
 
     recognition.onresult = function (event) {
-
-
         let interim_transcript = '';
 
         for (let i = event.resultIndex; i < event.results.length; ++i) {
@@ -55,20 +49,41 @@ export default () => {
             }
         }
 
-        if (document.getElementById('transcript')) setTranscript(`${final} ${interim_transcript}`)
+        if (document.getElementById('transcript')) setTranscript(`${final} ${interim_transcript}`);
     };
 
     recognition.onend = function () {
         console.log('Stopped listening');
     };
 
+    async function sendTranscriptToChat(transcript) {
+        try {
+            const response = await fetch('http://127.0.0.1:5000/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message: transcript }),
+            });
 
+            const result = await response.json();
+            if (response.ok) {
+                setGptres(result.response);
+            } else {
+                console.error('Error from server:', result.error);
+                setGptres('Sorry, there was an error processing your request.');
+            }
+        } catch (error) {
+            console.error('Network error:', error);
+            setGptres('Sorry, we could not connect to the server.');
+        }
+    }
 
     window.onkeyup = (e) => {
         if (e.key === 'Escape' && job) {
-            setJob(false)
+            setJob(false);
         }
-    }
+    };
 
     return (<>
         <div className='viz'>
@@ -77,7 +92,6 @@ export default () => {
                 color: '#fefefe',
                 height: 'calc(100vh - 250px)',
                 borderRadius: '10px',
-                // outline: '3px solid rgba(255, 255, 255, 1)',
                 backdropFilter: 'blur(10px)',
                 flexDirection: 'column',
                 display: (start || gptres) ? 'block' : 'flex',
@@ -106,9 +120,10 @@ export default () => {
                         }}
                         onClick={(e) => {
                             if (start) {
-                                setStart(false)
+                                setStart(false);
+                                sendTranscriptToChat(transcript);  // Send transcript to backend
                                 setGptres(response)
-                                runE2()
+                                runE2();
                             }
                             recognition[!start ? 'start' : 'stop']();
                         }}>
@@ -121,7 +136,6 @@ export default () => {
                         <div id="reset" onClick={() => setGptres(false)}>Got another question?</div>
                     </>}
                     {start && <p id="transcript" dangerouslySetInnerHTML={{ __html: transcript }}></p>}
-                    {/* <p style={{ display: start ? 'block' : 'none' }}></p> */}
                 </div>
             </main>
         </div>
