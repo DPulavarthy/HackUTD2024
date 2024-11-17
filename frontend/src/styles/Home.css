@@ -16,7 +16,7 @@
 }
 
 button {
-    margin: 2vh auto -20px auto;
+    margin: 2vh auto -10px auto;
     background-color: var(--primary);
     color: var(--white);
     padding: 17px 20px;
@@ -111,6 +111,15 @@ button:focus {
     flex-direction: column;
 }
 
+.chart-display-container.split {
+    display: block;
+}
+
+.chart-display-container.split .chart-container {
+    width: calc(100% - 20px);
+    margin-bottom: 20px;
+}
+
 /* Each chart container */
 .chart-container {
     width: 25vw;
@@ -121,14 +130,31 @@ button:focus {
     padding: 20px;
 }
 
+.animate {
+    animation: scroll 60s linear infinite;
+}
+
+.flowset {
+    overflow: hidden !important;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(calc(-50% + 10px));
+    }
+}
+
 .chart-container:hover {
     box-shadow: 0 6px 12px var(--shadow);
 }
 
 /* Styling for images (charts) */
 .chart {
-    width: 100%;
-    border-radius: 5px;
+    width: 100% !important;
 }
 
 /* Styling for the name of each chart */
@@ -139,4 +165,10 @@ button:focus {
     color: var(--white);
     text-transform: uppercase;
     letter-spacing: 1px;
+}
+
+.half {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 20px;
 }

@@ -104,7 +104,7 @@
 
 //     const floorSubmit = async () => {
 //         try {
-            
+
 //             upload(document.querySelector('#floor #cache').textContent, floorFile.name, floorFile.type);
 //             localStorage.setItem('floorFile', document.querySelector('#floor #cache').textContent);
 //         } catch (error) {
@@ -161,7 +161,7 @@
 //         }
 //     }
 
-    
+
 
 //     return <>
 //         <Navbar />
@@ -174,7 +174,7 @@
 //                 <input type="checkbox" id="uploaded" class="file-upload-checkbox" disabled />
 //             </label>
 //         </div> */}
-        
+
 //         <div class="upload-container">
 
 //             <div class="testing-container">
@@ -270,21 +270,22 @@ export default () => {
     const masterSubmit = async () => {
         try {
             const formData = new FormData();
-    
+
             if (powerFile) formData.append("files", powerFile);
             if (waterFile) formData.append("files", waterFile);
             if (floorFile) formData.append("files", floorFile);
             if (carbonFile) formData.append("files", carbonFile);
             if (wasteFile) formData.append("files", wasteFile);
-    
+
             const response = await fetch("http://127.0.0.1:5000/upload", {
                 method: "POST",
                 body: formData,
             });
-    
+
             const result = await response.json();
             if (response.ok) {
                 alert(`Success: ${result.message}`);
+                window.location.href = "/"
             } else {
                 alert(`Error: ${result.error}`);
             }
@@ -292,37 +293,54 @@ export default () => {
             console.error("Error submitting files:", error);
             alert("An error occurred while submitting files.");
         }
+
+        try {
+            const powerContent = powerFile ? await uploadFile(powerFile) : null;
+            const waterContent = waterFile ? await uploadFile(waterFile) : null;
+            const floorContent = floorFile ? await uploadFile(floorFile) : null;
+            const carbonContent = carbonFile ? await uploadFile(carbonFile) : null;
+            const wasteContent = wasteFile ? await uploadFile(wasteFile) : null;
+
+            if (powerContent) await upload(powerContent, powerFile.name, powerFile.type);
+            if (waterContent) await upload(waterContent, waterFile.name, waterFile.type);
+            if (floorContent) await upload(floorContent, floorFile.name, floorFile.type);
+            if (carbonContent) await upload(carbonContent, carbonFile.name, carbonFile.type);
+            if (wasteContent) await upload(wasteContent, wasteFile.name, wasteFile.type);
+
+        } catch (error) {
+            console.log('Error during file upload:', error);
+        }
+
     };
-    
-    
+
+
     return (
         <>
             <Navbar />
-
             <div className="upload-container">
                 <div className="testing-container">
                     <div id="power" className="upload-section-container">
-                        <label className="form-label">Power File</label>
+                        <label className={`form-label ${powerFile?.name && 'selected'}`} data-value={powerFile?.name && `(${powerFile?.name})`}>Power File</label>
                         <input type="file" id="file" onChange={powerHandler} className="file-input" />
                     </div>
 
                     <div id='water' className="upload-section-container">
-                        <label className="form-label">Water File</label>
+                        <label className={`form-label ${waterFile?.name && 'selected'}`} data-value={waterFile?.name && `(${waterFile?.name})`}>Water File</label>
                         <input type="file" id="file" onChange={waterHandler} className="file-input" />
                     </div>
 
                     <div id='floor' className="upload-section-container">
-                        <label className="form-label">Floor File</label>
+                        <label className={`form-label ${floorFile?.name && 'selected'}`} data-value={floorFile?.name && `(${floorFile?.name})`}>Floor File</label>
                         <input type="file" id="file" onChange={floorHandler} className="file-input" />
                     </div>
 
                     <div id='carbon' className="upload-section-container">
-                        <label className="form-label">Carbon File</label>
+                        <label className={`form-label ${carbonFile?.name && 'selected'}`} data-value={carbonFile?.name && `(${carbonFile?.name})`}>Carbon File</label>
                         <input type="file" id="file" onChange={carbonHandler} className="file-input" />
                     </div>
 
                     <div id='waste' className="upload-section-container">
-                        <label className="form-label">Waste File</label>
+                        <label className={`form-label ${wasteFile?.name && 'selected'}`} data-value={wasteFile?.name && `(${wasteFile?.name})`}>Waste File</label>
                         <input type="file" id="file" onChange={wasteHandler} className="file-input" />
                     </div>
                 </div>

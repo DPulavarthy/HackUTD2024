@@ -2,15 +2,91 @@
     display: flex;
     flex-direction: column;
     margin: 1vw;
+    justify-content: center;
+    align-items: center;
 }
 
 .testing-container {
     display: flex;
     flex-direction: column;
-    align-items: left;
-    border: 2px solid blue;
-    border-radius: 6px;
-    width: fit-content;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
     padding: 10px;
     gap: 3px;
+    /* background: red; */
+}
+
+.upload-section-container {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 1vw;
+    width: 100%;
+    /* background: blue; */
+}
+
+.form-label {
+    font-size: 70px;
+    width: 30vw;
+    text-transform: uppercase;
+    font-weight: normal;
+    opacity: 0.7;
+    transition-duration: 200ms;
+    text-align: center;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.form-label:after {
+    content: attr(data-value);
+    display: block;
+    margin: 20px -10px 0 0;
+    font-size: 20px;
+    width: 10px;
+    height: 20px;
+    color: var(--color);
+}
+
+.form-label.selected {
+    opacity: 1;
+    font-weight: bold;
+    color: var(--highlights);
+}
+
+input[type="file"] {
+    position: absolute;
+    margin-top: 20px;
+    height: 70px; /* Set a defined height for the input */
+    width: 30vw;
+    opacity: 0; /* Hide the input */
+    cursor: pointer;
+}
+
+input[type="file"]::file-selector-button {
+    width: 160px;
+    /* gap: 5px; */
+    padding: 10px; /* Add padding for better button sizing */
+    border: 1px solid #ccc; /* Optional: Add a border to make the button more visible */
+    background-color: #f0f0f0; /* Optional: Background color for the button */
+    border-radius: 5px; /* Optional: Rounded corners for the button */
+}
+
+input[type="file"]::before {
+    position: absolute;
+    pointer-events: none;
+    top: 50%;
+    left: 10px;
+    display: flex;
+    transform: translateY(-50%);
+    height: 24px;
+    width: 24px;
+    content: "";
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230964B0'%3E%3Cpath d='M18 15v3H6v-3H4v3c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-3h-2zM7 9l1.41 1.41L11 7.83V16h2V7.83l2.59 2.58L17 9l-5-5-5 5z'/%3E%3C/svg%3E");
+    background-size: contain;
+}
+
+.upload-container button {
+    border-radius: 5px;
 }

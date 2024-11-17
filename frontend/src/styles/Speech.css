@@ -20,14 +20,14 @@
     font-size: 26px;
     max-width: calc(100%);
     font-family: "Beiruti", system-ui !important;
-    text-shadow: 1px 1px black;
+    color: var(--color);
     text-transform: uppercase;
     max-height: calc(70vh - 60px);
     overflow: hidden;
 }
 
 .speech b {
-    color: #e74c3c;
+    color: var(--primary);
     font-weight: 500;
     border-radius: 5px;
     text-shadow: none;
@@ -52,7 +52,7 @@
     height: 10px;
     position: absolute;
     left: 16px;
-    margin-top: -4px;
+    margin-top: -9px;
     font-size: 32px;
     font-weight: 700;
     font-family: "Beiruti", system-ui !important;
@@ -181,4 +181,17 @@
 
 .viz {
     margin: 15px;
+}
+
+#reset {
+    color: var(--background);
+    background: var(--highlights);
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 22px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition-duration: 200ms;
+    font-weight: bold;
 }

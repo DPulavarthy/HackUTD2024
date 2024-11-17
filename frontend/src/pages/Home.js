@@ -1,54 +1,9 @@
-// import '../styles/Home.css'
-// import Navbar from '../components/Navbar';
-// import React, { useEffect } from 'react';
-
-// export default () => {
-
-// return (
-//     <>
-//         <Navbar />
-//         <div class="home-container"> 
-//             <button>SPLIT</button>
-//             <div class="left"></div>
-//             <div class="right">
-//               <img class="building-img" src="fake-building.jpg"/>
-//               <div class="chart-display-container">
-//                   <div class="chart-container" id="power">
-//                       <img src="fake-building.jpg" class="chart" />
-//                       <h3 class="name"> Power </h3>
-//                   </div>
-//                   <div class="chart-container" id="water">
-//                       <img src="fake-building.jpg" class="chart" />
-//                       <h3 class="name"> Water </h3>
-//                   </div>
-//                   <div class="chart-container" id="access">
-//                       <img src="fake-building.jpg" class="chart" />
-//                       <h3 class="name"> Access </h3>
-//                   </div>
-//                   <div class="chart-container" id="carbon">
-//                       <img src="fake-building.jpg" class="chart" />
-//                       <h3 class="name"> Carbon </h3>
-//                   </div>
-//                   <div class="chart-container" id="cost">
-//                       <img src="fake-building.jpg" class="chart" />
-//                       <h3 class="name"> Cost </h3>
-//                   </div>
-//                   <div class="chart-container" id="cost">
-//                       <img src="fake-building.jpg" class="chart" />
-//                       <h3 class="name"> Waste </h3>
-//                   </div>
-//               </div>
-//             </div>
-//         </div>
-//     </>
-// )};
-
 import '../styles/Home.css';
 import Navbar from '../components/Navbar';
 import React, { useState } from 'react';
 import Speech from '../components/Speech';
 import BarChart from '../components/BarChart';
-import pinata from '../utils/config.js';
+import { pinata, getFile, getAllFiles } from '../utils/config.js';
 
 export default () => {
   const [isSplit, setIsSplit] = useState(false);
@@ -56,6 +11,9 @@ export default () => {
   const handleSplit = () => {
     setIsSplit((prev) => !prev);
   };
+
+  // getFile('carbonData.csv')
+  // getAllFiles();
 
   return (
     <>
@@ -69,34 +27,58 @@ export default () => {
         <div className={`left ${isSplit ? 'visible' : 'hidden'}`}>
           <Speech />
         </div>
-        <div className={`right ${isSplit ? 'split' : ''}`}>
-          {/* <img className="building-img" src="fake-building.jpg" /> */}
-          <BarChart />
-          <div className={`chart-display-container ${isSplit ? 'split' : ''}`}>
+        <div className={`right ${isSplit ? 'split flowset' : ''}`}>
+          <div className={`chart-display-container ${isSplit ? 'split animate' : ''}`}>
             <div className="chart-container" id="power">
-              <img src="fake-building.jpg" className="chart" />
+              <BarChart className="chart" chart_type="power" chart_title="Energy Consumption by Floor" csvFilePath={'/electricityData.csv'} axes={{ 'x': 'Floor', 'y': 'Total Energy Consumed (kWh)' }} graphType="PieChart" />
               <h3 className="name">Power</h3>
             </div>
             <div className="chart-container" id="water">
-              <img src="fake-building.jpg" className="chart" />
+              <BarChart className="chart" chart_type="water" chart_title="Water Consumption by Day" csvFilePath={'/waterData.csv'} axes={{ 'x': 'Date', 'y': 'Water Consumption (liters)' }} graphType="PieChart" />
               <h3 className="name">Water</h3>
             </div>
             <div className="chart-container" id="access">
-              <img src="fake-building.jpg" className="chart" />
+              <BarChart className="chart" chart_type="access" chart_title="# of People occupying by Day" csvFilePath={'/floorData.csv'} axes={{ 'x': 'Date', 'y': '# of People' }} graphType="AreaChart" />
               <h3 className="name">Access</h3>
             </div>
-            <div className="chart-container" id="carbon">
-              <img src="fake-building.jpg" className="chart" />
-              <h3 className="name">Carbon</h3>
-            </div>
             <div className="chart-container" id="cost">
-              <img src="fake-building.jpg" className="chart" />
+              <BarChart className="chart" chart_type="cost" chart_title="Total Cost of Utilities" csvFilePath={'/waterData.csv'} csvFilesPath={'electricityData.csv'} axes={{ 'x': 'Source Type', 'y': '' }} graphType="BarChart" />
               <h3 className="name">Cost</h3>
             </div>
+            <div className="chart-container" id="carbon">
+              <BarChart className="chart" chart_type="carbon" chart_title="Carbon Emissions by Source" csvFilePath={'/carbonData.csv'} axes={{ 'x': 'Source Type', 'y': 'Carbon Emissions (kg CO₂)' }} graphType="BarChart" />
+              <h3 className="name">Carbon</h3>
+            </div>
             <div className="chart-container" id="waste">
-              <img src="fake-building.jpg" className="chart" />
+              <BarChart className="chart" chart_type="waste" chart_title="Wastage by Floor" csvFilePath={'/wasteData.csv'} axes={{ 'x': 'Floor', 'y': 'Wasteage (kg)' }} graphType="LineChart" />
               <h3 className="name">Waste</h3>
             </div>
+            {isSplit && <>
+              <div className="chart-container dupe" id="power">
+                <BarChart className="chart" chart_type="power" chart_title="Energy Consumption by Floor" csvFilePath={'/electricityData.csv'} axes={{ 'x': 'Floor', 'y': 'Total Energy Consumed (kWh)' }} graphType="PieChart" />
+                <h3 className="name">Power</h3>
+              </div>
+              <div className="chart-container dupe" id="water">
+                <BarChart className="chart" chart_type="water" chart_title="Water Consumption by Day" csvFilePath={'/waterData.csv'} axes={{ 'x': 'Date', 'y': 'Water Consumption (liters)' }} graphType="PieChart" />
+                <h3 className="name">Water</h3>
+              </div>
+              <div className="chart-container dupe" id="access">
+                <BarChart className="chart" chart_type="access" chart_title="# of People occupying by Day" csvFilePath={'/floorData.csv'} axes={{ 'x': 'Date', 'y': '# of People' }} graphType="AreaChart" />
+                <h3 className="name">Access</h3>
+              </div>
+              <div className="chart-container dupe" id="cost">
+                <BarChart className="chart" chart_type="cost" chart_title="Total Cost of Utilities" csvFilePath={'/waterData.csv'} csvFilesPath={'electricityData.csv'} axes={{ 'x': 'Source Type', 'y': '' }} graphType="BarChart" />
+                <h3 className="name">Cost</h3>
+              </div>
+              <div className="chart-container dupe" id="carbon">
+                <BarChart className="chart" chart_type="carbon" chart_title="Carbon Emissions by Source" csvFilePath={'/carbonData.csv'} axes={{ 'x': 'Source Type', 'y': 'Carbon Emissions (kg CO₂)' }} graphType="BarChart" />
+                <h3 className="name">Carbon</h3>
+              </div>
+              <div className="chart-container dupe" id="waste">
+                <BarChart className="chart" chart_type="waste" chart_title="Wasteage by Floor" csvFilePath={'/wasteData.csv'} axes={{ 'x': 'Floor', 'y': 'Wasteage (kg)' }} graphType="LineChart" />
+                <h3 className="name">Waste</h3>
+              </div>
+            </>}
           </div>
         </div>
       </div>
