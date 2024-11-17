@@ -1,0 +1,85 @@
+.navbar {
+    background: var(--primary);
+    padding: 5px 30px;
+    display: flex;
+    filter: drop-shadow(0 0 0.75rem var(--highlights));
+}
+
+.navbar img {
+    width: 50px;
+    height: 50px;
+    margin: auto 30px auto 0;
+}
+
+.navbar h1 {
+    font-size: 40px;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.navbar h1 b {
+    color: var(--background);
+}
+
+.navbar span {
+    width: 100%;
+}
+
+.navbar h2 {
+    font-size: 20px;
+    color: var(--background);
+    white-space: nowrap;
+    margin: auto 0;
+}
+
+.navbar h2 i {
+    font-weight: normal;
+    font-size: 16px;
+    opacity: 0.8;
+}
+
+.overlay {
+    position: fixed;
+    z-index: 1000;
+    width: 100vw;
+    height: 100vh;
+    background: var(--background);
+    animation: hide 1s forwards ease-in-out;
+}
+
+.overlay h1 {
+    position: fixed;
+    margin: 0;
+    font-size: 40px;
+    font-weight: bold;
+    animation: also-hide 2s forwards ease-in-out;
+    align-items: center;
+    color: var(--color);
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+}
+
+@keyframes hide {
+    0% {
+        background: var(--background);
+    }
+    100% {
+        background: transparent;
+        pointer-events: none;
+    }
+}
+
+@keyframes also-hide {
+    0% {
+        top: 50%;
+        right: 50%;
+        transform: translate(50%, -50%);
+    }
+    100% {
+        top: 5px;
+        right: calc(100vw - 482.5px);
+        transform: translate(0, 0);
+        opacity: 0;
+    }
+}

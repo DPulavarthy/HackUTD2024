@@ -6,9 +6,10 @@
 :root {
   --code: 16px/1.5 "Geist Mono", monospace;
   --font: 16px/1.5 "Ubuntu", system-ui;
-  --background: #151515;
-  --primary: #6b69d6;
-  --color: #f6f6f6;
+  --background: #f8feef;
+  --highlights: #f48024;
+  --primary: #96c160;
+  --color: #624c50;
 }
 
 /* Apply global styles. */

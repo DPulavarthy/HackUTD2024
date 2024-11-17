@@ -2,5 +2,10 @@
 import '../styles/Navbar.css';
 
 export default () => <>
-    <h1>Navbar</h1>
+    <nav className="navbar">
+        <img src="/icon.png" alt="VizWhiz" />
+        <h1> Welcome to, <b>VizWiz</b></h1>
+        <span></span>
+        <h2>Dani P. <i>(Standard User)</i></h2>
+    </nav>
 </>
