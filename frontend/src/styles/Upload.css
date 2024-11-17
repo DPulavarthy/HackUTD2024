@@ -7,7 +7,7 @@
     font-size: 2vw;
 }
 .file-input {
-    display: none;
+    /* display: none; */
 }
 
 .file-input-button {
