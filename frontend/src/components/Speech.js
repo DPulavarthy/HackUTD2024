@@ -7,7 +7,6 @@ export default () => {
     let response = "Based on the waste data provided: 1. **Waste Management Insights**: - Floor 1 consistently shows higher waste generation compared to the other floors, with a notable peak on 10/17/2024, where it reached 36.86 kg【4:6†waste.json】. - Floor 2 also exhibits significant waste generation, hitting a peak of 41.49 kg on 10/11/2024【4:12†waste.json】. - Floors 3 and 4 generally generate less waste but still show fluctuations, suggesting opportunities for targeted waste reduction strategies【4:8†waste.json】【4:10†waste.json】. These trends suggest areas for improvement in your waste management strategy. Consider implementing recycling programs or engaging floor-specific initiatives to reduce overall waste output. Additionally, floors with lower waste output might benefit from recognition programs to encourage continued efficient practices. Unfortunately, the data available solely relates to waste management. If you're seeking insights on carbon emissions, energy consumption, or water usage, please upload the respective datasets for me to provide comprehensive recommendations."
 
     const [objectId, setObjectId] = useState(null);
-
     const [percent, setPercent] = useState(0);
     const [freelancers, setFreelancers] = useState([]);
 

@@ -6,7 +6,7 @@ import pandas as pd
 from vars import key
 # Initialize Flask app and OpenAI client
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
+CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}}) 
 client = OpenAI(api_key=key)  # Replace with your OpenAI API key
 UPLOAD_FOLDER = "./uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -46,6 +46,7 @@ def upload_files():
     try:
         # Create a vector store
         vector_store = client.beta.vector_stores.create(name="Office Data")
+        print(f"Created vector store with ID: {vector_store.id}")
         
         # Open JSON files for streaming
         file_streams = [open(path, "rb") for path in json_files]
@@ -67,15 +68,15 @@ def upload_files():
         assistant = client.beta.assistants.create(
             name="Sustainability Advisor",
             instructions="""
-            This assistant is designed to provide sustainability advice for property managers looking to optimize their office spaces. It uses the data provided about carbon emissions, energy consumption, water usage, and waste management across various floors. Based on this data, the assistant can help identify areas for improvement and suggest actionable steps to reduce environmental impact.
+            You are a voice assistant designed to provide quick, actionable sustainability advice for property managers. Using data on carbon emissions, energy consumption, water usage, and waste management, you deliver brief insights and suggestions to optimize office spaces. Focus on providing concise, impactful responses.
 
-            Sample queries include:
-            - "How to reduce carbon footprint from my office space?"
-            - "Which floors have the most electrical and water consumption?"
-            - "Which floors could improve in waste management?"
-            - "What steps can be taken to optimize energy usage in my office?"
+Sample queries include:
 
-            The assistant will analyze the data attributes from the provided files to give actionable advice on sustainability improvements in your office spaces.
+"How can I reduce my office's carbon footprint?"
+"Which floors consume the most energy and water?"
+"Where can waste management be improved?"
+"How can I optimize energy usage in the office?"
+Provide clear, actionable recommendations in a conversational tone.
             """,
             model="gpt-4o",
             tools=[{"type": "file_search"}],
@@ -88,10 +89,14 @@ def upload_files():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+from flask_cors import cross_origin
+
 @app.route("/chat", methods=["POST"])
 def chat():
     global assistant
     global vector_store
+    print("In chat")
+    print(assistant.id,vector_store.id)
     
     # Check if assistant and vector store are initialized
     if assistant is None or vector_store is None:
@@ -103,14 +108,13 @@ def chat():
         return jsonify({"error": "No message provided"}), 400
 
     try:
-        # Create a thread for the conversation
-        thread = client.beta.threads.create(assistant_id=assistant.id)
-
-        # Add the user message to the thread
-        client.beta.threads.messages.create(
-            thread_id=thread.id,
-            content={"role": "user", "text": user_message}
-        )
+        thread = client.beta.threads.create(
+            messages=[
+            {
+                "role": "user",
+                "content": user_message,
+            }
+        ])
 
         # Create and poll the run
         run = client.beta.threads.runs.create_and_poll(
@@ -119,11 +123,11 @@ def chat():
 
         # Retrieve the messages from the thread
         messages = list(client.beta.threads.messages.list(thread_id=thread.id, run_id=run.id))
-        
+        print(messages)
         # Extract the response message
         response_message = messages[-1].content[0].text
-
-        return jsonify({"response": response_message})
+        print(response_message)
+        return jsonify({"response": response_message.value})
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
