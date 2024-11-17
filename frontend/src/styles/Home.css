@@ -1,0 +1,23 @@
+.header {
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-end;
+    margin: 1vw;
+    gap: 2vw;
+}
+
+.header .name, .header .access-level {
+    margin: 0px;
+}
+
+.chart-display-container {
+    display: flex;
+}
+
+.chart-container {
+    border: 2px solid white;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 10px;
+    justify-items: center;
+}
