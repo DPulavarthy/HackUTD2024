@@ -1,0 +1,97 @@
+.home-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+button {
+    margin: 2vh auto;
+}
+
+.header {
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-end;
+    margin: 1vw;
+    gap: 2vw;
+}
+
+.building-img {
+    width: 30vw;
+    display: block;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Main container for all chart items */
+.chart-display-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+}
+
+/* Each chart container */
+.chart-container {
+    width: 25vw;
+    text-align: center;
+    background: var(--primary);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.chart-container:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Styling for images (charts) */
+.chart {
+    width: 100%;
+    border-radius: 5px;
+}
+
+/* Styling for the name of each chart */
+.name {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+button {
+    background-color: var(--primary); /* Green */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  button:hover {
+    background-color: #45a049; /* Darker green */
+    transform: scale(1.05); /* Slightly enlarge */
+  }
+  
+  button:active {
+    background-color: #397d3a; /* Even darker green */
+    transform: scale(0.98); /* Slightly shrink */
+  }
+  
+  button:focus {
+    outline: 3px solid #80c683; /* Light green outline */
+    outline-offset: 2px;
+  }
+  
