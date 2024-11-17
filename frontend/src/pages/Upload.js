@@ -285,7 +285,7 @@ export default () => {
             const result = await response.json();
             if (response.ok) {
                 // alert(`Success: ${result.message}`);
-                window.location.href = "/"
+                window.location.href = "/home"
             } else {
                 // alert(`Error: ${result.error}`);
             }

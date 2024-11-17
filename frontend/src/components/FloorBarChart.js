@@ -55,11 +55,31 @@ const PeopleLineChart = ({ csvFile }) => {
           data={chartData}
           options={{
             title: chartTitle,
+            backgroundColor: '#c9e89b',
             titleTextStyle: {
               color: '#624c50',
             },
-            hAxis: { title: 'Date' },
-            vAxis: { title: 'Number of People' },
+            textStyle: {
+              color: '#624c50'
+            },
+            hAxis: {
+              title: 'Date',
+              titleTextStyle: {
+                color: '#624c50',
+              },
+              textStyle: {
+                color: '#624c50'
+              },
+            },
+            vAxis: {
+              title: 'Number of People',
+              titleTextStyle: {
+                color: '#624c50',
+              },
+              textStyle: {
+                color: '#624c50'
+              },
+            },
             legend: { position: 'bottom' },
             pointSize: 5,  // Adjust the point size for better visibility
             curveType: 'function',  // Smoothing for the lines

@@ -13,8 +13,8 @@ import './index.css';
 
 // Create a router.
 const router = createBrowserRouter([
-  { path: "upload", element: <Upload /> },
-  { path: "/", element: <Home /> },
+  { path: "/", element: <Upload /> },
+  { path: "home", element: <Home /> },
 ]);
 
 // Render the router.

@@ -67,6 +67,13 @@ const CostDoughnutChart = ({ electricityFile, waterFile }) => {
           data={chartData}
           options={{
             title: `Total Costs for Each Floor`,
+            backgroundColor: '#c9e89b',
+            titleTextStyle: {
+              color: '#624c50',
+            },
+            textStyle: {
+              color: '#624c50'
+            },
             pieHole: 0.4,  // Makes it a doughnut chart
             slices: {
               0: { offset: 0.1 },

@@ -69,11 +69,30 @@ const CarbonBarChart = ({ csvFile, userDate, userTime }) => {
           data={chartData}
           options={{
             title: chartTitle,
+            backgroundColor: '#c9e89b',
+            titleTextStyle: {
+              color: '#624c50',
+            },
+            textStyle: {
+              color: '#624c50'
+            },
             hAxis: {
               title: 'Floor',
+              titleTextStyle: {
+                color: '#624c50',
+              },
+              textStyle: {
+                color: '#624c50'
+              },
             },
             vAxis: { 
-              title: 'Carbon Emissions (kg CO₂)' 
+              title: 'Carbon Emissions (kg CO₂)',
+              titleTextStyle: {
+                color: '#624c50',
+              },
+              textStyle: {
+                color: '#624c50'
+              }, 
             },
             chartArea: { width: '70%' },
             legend: { position: 'bottom' },

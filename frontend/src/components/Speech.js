@@ -122,7 +122,6 @@ export default () => {
                             if (start) {
                                 setStart(false);
                                 sendTranscriptToChat(transcript);  // Send transcript to backend
-                                setGptres(response)
                                 runE2();
                             }
                             recognition[!start ? 'start' : 'stop']();

@@ -4,7 +4,7 @@ import Papa from 'papaparse';
 
 const WaterBarChart = ({ csvFile, userDate, userTime }) => {
   const [chartData, setChartData] = useState([]);
-  const [chartTitle, setChartTitle] = useState(''); 
+  const [chartTitle, setChartTitle] = useState('');
 
   useEffect(() => {
     // Load and parse CSV file
@@ -16,11 +16,11 @@ const WaterBarChart = ({ csvFile, userDate, userTime }) => {
       // Determine which data to use (default or user input)
       let filteredData = parsedData;
       let customDate = '';
-      
+
       // Default to last 4 rows
       filteredData = parsedData.slice(-4);
       parsedData.filter(
-        (row) =>  customDate = `${row.Date} ${row.Time}`
+        (row) => customDate = `${row.Date} ${row.Time}`
       );
 
       // Sort the data by Floor to ensure order from 1 to 4
@@ -64,8 +64,31 @@ const WaterBarChart = ({ csvFile, userDate, userTime }) => {
           data={chartData}
           options={{
             title: chartTitle,
-            hAxis: { title: 'Floor'},
-            vAxis: { title: 'Water Consumption (liters)' },
+            backgroundColor: '#c9e89b',
+            titleTextStyle: {
+              color: '#624c50',
+            },
+            textStyle: {
+              color: '#624c50'
+            },
+            hAxis: {
+              title: 'Floor',
+              titleTextStyle: {
+                color: '#624c50',
+              },
+              textStyle: {
+                color: '#624c50'
+              },
+            },
+            vAxis: {
+              title: 'Water Consumption (liters)',
+              titleTextStyle: {
+                color: '#624c50',
+              },
+              textStyle: {
+                color: '#624c50'
+              },
+            },
             chartArea: { width: '70%' },
             legend: { position: 'bottom' },
           }}

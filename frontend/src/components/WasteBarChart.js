@@ -55,8 +55,31 @@ const WasteageLineChart = ({ csvFile }) => {
           data={chartData}
           options={{
             title: chartTitle,
-            hAxis: { title: 'Date' },
-            vAxis: { title: 'Wasteage (kg)' },
+            backgroundColor: '#c9e89b',
+            titleTextStyle: {
+              color: '#624c50',
+            },
+            textStyle: {
+              color: '#624c50'
+            },
+            hAxis: {
+              title: 'Date',
+              titleTextStyle: {
+                color: '#624c50',
+              },
+              textStyle: {
+                color: '#624c50'
+              },
+            },
+            vAxis: {
+              title: 'Wasteage (kg)',
+              titleTextStyle: {
+                color: '#624c50',
+              },
+              textStyle: {
+                color: '#624c50'
+              },
+            },
             legend: { position: 'bottom' },
             pointSize: 5,  // Adjust the point size for better visibility
             curveType: 'function',  // Smoothing for the lines
