@@ -1,14 +1,83 @@
 .home-container {
     display: flex;
+    flex-direction: row;
+    padding: 20px;
+    overflow: hidden;
+    gap: 1vw;
+    height: 85vh;
+    overflow: hidden;
+}
+
+.center {
+    display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    height: 100vh;
+    justify-content: center;
 }
 
 button {
-    margin: 2vh auto;
+    margin: 2vh auto -20px auto;
+    background-color: var(--primary);
+    color: var(--white);
+    padding: 17px 20px;
+    border: none;
+    border-radius: 50%;
+    font-size: var(--font-size-medium);
+    font-weight: bold;
+    cursor: pointer;
+    transition:
+        background-color var(--transition-speed),
+        transform 0.2s ease;
 }
+
+button > img {
+    width: 50px;
+    height: 50px;
+}
+
+.left,
+.right {
+    width: 100vw;
+    transition: all 0.5s ease;
+    transition-duration: 500ms;
+}
+
+.left {
+    /* left: 0; */
+    /* background-color: lightblue; */
+    width: 0px;
+    overflow: hidden;
+}
+
+.right {
+    height: 85vh;
+    overflow: auto;
+}
+
+.split-view .left {
+    width: 50vw;
+    overflow: hidden;
+    margin-left: 80px;
+}
+
+.split-view .right {
+    left: 50vw;
+}
+/* 
+button:hover {
+    background-color: var(--primary-light);
+    transform: scale(1.05);
+}
+
+button:active {
+    background-color: var(--primary-dark);
+    transform: scale(0.98);
+}
+
+button:focus {
+    outline: 3px solid var(--primary-light);
+    outline-offset: 2px;
+} */
 
 .header {
     display: flex;
@@ -23,17 +92,23 @@ button {
     display: block;
     margin: 0 auto;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px var(--shadow);
 }
 
 /* Main container for all chart items */
 .chart-display-container {
     display: flex;
     flex-wrap: wrap;
+    /* flex-direction: column; */
     gap: 20px;
     align-items: center;
     justify-content: center;
     margin: 20px;
+}
+
+.chart-display-container .split {
+    flex-wrap: nowrap;
+    flex-direction: column;
 }
 
 /* Each chart container */
@@ -42,14 +117,12 @@ button {
     text-align: center;
     background: var(--primary);
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 8px var(--shadow-hover);
     padding: 20px;
-    transition: transform 0.3s ease-in-out;
 }
 
 .chart-container:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 12px var(--shadow);
 }
 
 /* Styling for images (charts) */
@@ -60,38 +133,10 @@ button {
 
 /* Styling for the name of each chart */
 .name {
-    margin-top: 10px;
-    font-size: 18px;
+    margin: 10px 0 0 0;
+    font-size: 28px;
     font-weight: bold;
-    color: #fff;
+    color: var(--white);
     text-transform: uppercase;
     letter-spacing: 1px;
 }
-
-button {
-    background-color: var(--primary); /* Green */
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-  }
-  
-  button:hover {
-    background-color: #45a049; /* Darker green */
-    transform: scale(1.05); /* Slightly enlarge */
-  }
-  
-  button:active {
-    background-color: #397d3a; /* Even darker green */
-    transform: scale(0.98); /* Slightly shrink */
-  }
-  
-  button:focus {
-    outline: 3px solid #80c683; /* Light green outline */
-    outline-offset: 2px;
-  }
-  

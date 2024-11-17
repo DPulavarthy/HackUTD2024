@@ -7,6 +7,7 @@
   --code: 16px/1.5 "Geist Mono", monospace;
   --font: 16px/1.5 "Ubuntu", system-ui;
   --background: #f8feef;
+  /* --background: #151515; */
   --highlights: #f48024;
   --primary: #96c160;
   --color: #624c50;
@@ -20,6 +21,8 @@ body {
   color: var(--color);
   font: var(--font);
   margin: 0;
+  height: 100vh;
+  overflow: hidden;
 }
 
 /* Apply styles to code elements. */
