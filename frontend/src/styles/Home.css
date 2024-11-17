@@ -111,15 +111,6 @@ button:focus {
     flex-direction: column;
 }
 
-.chart-display-container.split {
-    display: block;
-}
-
-.chart-display-container.split .chart-container {
-    width: calc(100% - 20px);
-    margin-bottom: 20px;
-}
-
 /* Each chart container */
 .chart-container {
     width: 25vw;
@@ -128,6 +119,10 @@ button:focus {
     border-radius: 10px;
     box-shadow: 0 4px 8px var(--shadow-hover);
     padding: 20px;
+}
+
+.split .chart-container {
+    width: 50vw;
 }
 
 .animate {
@@ -154,7 +149,7 @@ button:focus {
 
 /* Styling for images (charts) */
 .chart {
-    width: 100% !important;
+    width: 78% !important;
 }
 
 /* Styling for the name of each chart */

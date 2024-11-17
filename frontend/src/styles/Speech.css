@@ -23,7 +23,8 @@
     color: var(--color);
     text-transform: uppercase;
     max-height: calc(70vh - 60px);
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .speech b {
@@ -190,7 +191,7 @@
     padding: 10px;
     border-radius: 5px;
     font-size: 22px;
-    margin-top: 10px;
+    margin-top: 50px;
     cursor: pointer;
     transition-duration: 200ms;
     font-weight: bold;

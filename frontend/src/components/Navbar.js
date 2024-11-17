@@ -6,6 +6,6 @@ export default () => <>
         <img src="/icon.png" alt="VizWhiz" />
         <h1> Welcome to, <b>VizWiz</b></h1>
         <span></span>
-        <h2>Dani P. <i>(Standard User)</i></h2>
+        <h2>Dani P. <i>(Admin User)</i></h2>
     </nav>
 </>

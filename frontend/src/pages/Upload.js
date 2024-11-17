@@ -284,10 +284,10 @@ export default () => {
 
             const result = await response.json();
             if (response.ok) {
-                alert(`Success: ${result.message}`);
+                // alert(`Success: ${result.message}`);
                 window.location.href = "/"
             } else {
-                alert(`Error: ${result.error}`);
+                // alert(`Error: ${result.error}`);
             }
         } catch (error) {
             console.error("Error submitting files:", error);

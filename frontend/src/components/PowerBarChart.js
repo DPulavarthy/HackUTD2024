@@ -4,6 +4,7 @@ import Papa from 'papaparse';
 
 const PowerBarChart = ({ csvFile, userDate, userTime }) => {
   const [chartData, setChartData] = useState([]);
+  const [chartTitle, setChartTitle] = useState(''); 
 
   useEffect(() => {
     // Load and parse CSV file
@@ -14,15 +15,13 @@ const PowerBarChart = ({ csvFile, userDate, userTime }) => {
 
       // Determine which data to use (default or user input)
       let filteredData = parsedData;
-
-      if (userDate && userTime) {
-        filteredData = parsedData.filter(
-          (row) => row.Date === userDate && row.Time === userTime
-        );
-      } else {
-        // Use the last 4 rows as default
-        filteredData = parsedData.slice(-4);
-      }
+      let customDate = '';
+      
+      //
+      filteredData = filteredData = parsedData.slice(-4);
+      parsedData.filter(
+        (row) =>  customDate = `${row.Date} ${row.Time}`
+      );
 
       // Calculate energy consumption per category and format data for the chart
       const formattedData = [
@@ -51,6 +50,7 @@ const PowerBarChart = ({ csvFile, userDate, userTime }) => {
       ];
 
       setChartData(formattedData);
+      setChartTitle(`${customDate} Total Energy Consumption`);
     };
 
     fetchData();
@@ -65,9 +65,9 @@ const PowerBarChart = ({ csvFile, userDate, userTime }) => {
           height="400px"
           data={chartData}
           options={{
-            title: 'Bar Chart from CSV Data',
-            hAxis: { title: 'Floor', minValue: 0 },
-            vAxis: { title: 'Total Energy Consumed (kWh)Total Energy Consumed (kWh)' },
+            title: chartTitle,
+            hAxis: { title: 'Floor'},
+            vAxis: { title: 'Total Energy Consumed (kWh)' },
             chartArea: { width: '70%' },
             legend: { position: 'bottom' },
           }}
