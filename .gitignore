@@ -128,3 +128,6 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+backend/csvFiles/vars.py
+backend/vars.py
+backend/__pycache__/vars.cpython-39.pyc

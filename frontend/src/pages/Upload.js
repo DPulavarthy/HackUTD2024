@@ -269,42 +269,31 @@ export default () => {
 
     const masterSubmit = async () => {
         try {
-            // Log the file names before uploading
-            console.log('Uploading the following files:');
-            
-            if (powerFile) {
-                console.log(`Power File: ${powerFile.name}`);
-                upload(powerFile ? await uploadFile(powerFile) : null, powerFile.name, powerFile.type);
-            }
-            
-            if (waterFile) {
-                console.log(`Water File: ${waterFile.name}`);
-                upload(waterFile ? await uploadFile(waterFile) : null, waterFile.name, waterFile.type);
-            }
-            
-            if (carbonFile) {
-                console.log(`Carbon File: ${carbonFile.name}`);
-                upload(carbonFile ? await uploadFile(carbonFile) : null, carbonFile.name, carbonFile.type);
-            }
-            
-            if (floorFile) {
-                console.log(`Floor File: ${floorFile.name}`);
-                upload(floorFile ? await uploadFile(floorFile) : null, floorFile.name, floorFile.type);
-            }
-            
-            if (wasteFile) {
-                console.log(`Waste File: ${wasteFile.name}`);
-                upload(wasteFile ? await uploadFile(wasteFile) : null, wasteFile.name, wasteFile.type);
-            }
+            const formData = new FormData();
     
-            // Additional information can also be logged
-            const additionalInfo = document.querySelector('#additional-input').value;
-            console.log(`Additional Information: ${additionalInfo}`);
+            if (powerFile) formData.append("files", powerFile);
+            if (waterFile) formData.append("files", waterFile);
+            if (floorFile) formData.append("files", floorFile);
+            if (carbonFile) formData.append("files", carbonFile);
+            if (wasteFile) formData.append("files", wasteFile);
     
+            const response = await fetch("http://127.0.0.1:5000/upload", {
+                method: "POST",
+                body: formData,
+            });
+    
+            const result = await response.json();
+            if (response.ok) {
+                alert(`Success: ${result.message}`);
+            } else {
+                alert(`Error: ${result.error}`);
+            }
         } catch (error) {
-            console.log('Error during submission:', error);
+            console.error("Error submitting files:", error);
+            alert("An error occurred while submitting files.");
         }
-    }
+    };
+    
     
     return (
         <>
