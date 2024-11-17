@@ -1,0 +1,57 @@
+Electricity Data:
+
+Data
+Floor
+Area
+total Energy Consumed
+Cost
+% Lighting Consumption
+% HVAC Consumption
+% Computing Consumption
+% Refigeration Consumption
+% Office Equipment
+% Water Heating
+% Misc.
+
+
+Carbon Emmisions:
+Date
+time
+floor
+carbon Emmisions
+source type
+
+
+Water Usage:
+Date
+time
+floor
+water Consumption
+Cost
+% Restrooms
+% Cooling System
+% Kitchen
+% Misc.
+
+Waste: (per day)
+Date
+Floor
+Wasteage
+
+
+Access Data:
+
+Date
+Floor
+Maximum Capacity of Floor
+Area
+time(hours)
+# of People
+
+
+
+
+
+
+
+
